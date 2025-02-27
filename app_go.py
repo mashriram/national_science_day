@@ -29,6 +29,10 @@ from langchain_experimental.tools import PythonREPLTool
 
 # Gradio
 import gradio as gr
+from dotenv import load_dotenv
+
+load_dotenv()
+MODEL = os.getenv("MODEL", "gemma:latest")
 
 # ----------------------- 0. Create Data Directory (if it doesn't exist) -----------------------
 DATA_DIR = "./data"
@@ -82,7 +86,7 @@ def create_retriever(vectordb: Chroma):  # Removed search_kwargs
 
 
 # ----------------------- 3. Initialize ChatOllama -----------------------
-def initialize_ollama(model="gemma:latest"):
+def initialize_ollama(model=MODEL):
     llm = ChatOllama(model=model)
     return llm
 
