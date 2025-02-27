@@ -26,7 +26,10 @@ from langchain_community.tools import YouTubeSearchTool
 from langchain_community.utilities import WikipediaAPIWrapper
 from langchain_community.tools import WikipediaQueryRun
 from langchain_experimental.tools import PythonREPLTool
+from dotenv import load_dotenv
 
+load_dotenv()
+MODEL = os.getenv("MODEL", "gemma:latest")
 # Gradio
 import gradio as gr
 
@@ -72,7 +75,7 @@ def create_retriever(vectordb, search_kwargs={"k": 3}):
 
 
 # ----------------------- 3. Initialize ChatOllama -----------------------
-def initialize_ollama(model="gemma:latest"):
+def initialize_ollama(model=MODEL):
     llm = ChatOllama(model=model)
     return llm
 
